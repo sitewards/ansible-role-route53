@@ -1,0 +1,14 @@
+---
+- name: "Update the DNS records for the specified domains"
+  route53:
+    command: "{{ route53_state }}"
+    # We always want our supplied set of values to be the ones in use in Route53, and to reset the state of anything
+    # that exists there.
+    overwrite: "yes"
+    type: "{{ route53_type }}"
+    zone: "{{ route53_zone }}"
+    record: "{{ item }}"
+    ttl: "{{ route53_ttl }}"
+    value: "{{ route53_values }}"
+    wait: "no"
+  with_items: "{{ route53_records }}"

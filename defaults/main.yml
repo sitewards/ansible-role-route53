@@ -1,0 +1,34 @@
+---
+# Whether you want the record to exist, or not. Valid values are
+# - get
+# - create
+# - delete
+route53_state: "create"
+
+# Type type of DNS record you wish to add. All DNS record types are supported; you can see a list of them at the
+# following URL:
+#   https://aws.amazon.com/de/route53/faqs/#which_dns_records_are_supported
+route53_type: "A"
+
+# The zone that you want to add. Route53 controls "zones", or a set of domains. Often times it's just the root domain,
+# but not always. If you don't know yours, take a look in Route53:
+#   http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/CreatingHostedZone.html
+# (Required)
+# route53_zone: __YOUR_ZONE_HERE__
+
+# The record that you want to create. This is the full domain name, including the zone
+# (Required)
+# route53_records
+#   - "__YOUR_VALUE_HERE__"
+
+# How long a DNS resolver should wait until it re-checks the DNS record (in seconds). DNS is heavily cached; a lower TTL
+# will mean a performance hit more often, but a higher TTL makes it hard to change records. The default (5 minutes) is
+# pretty safe
+route53_ttl: "300"
+
+# The records that you wish to attach to the zone. You can have multiple records -- for example, if you want to have
+# redundancy in your load balancers, you can add two IPs here. If that happens, the first connection will fail, but the
+# second will not, and the second value will be cached.
+# (Required)
+# route53_values:
+#  - "__YOUR_VALUE_HERE__"
